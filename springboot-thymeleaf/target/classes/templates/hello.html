@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf的入门</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<!--输出hello java数据-->
+<p th:text="${test1}"></p>
+<p th:utext="${test2}"></p>
+<!--循环-->
+<table>
+    <tr>
+        <th>下标</th>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>地址</th>
+    </tr>
+    <tr th:each="user,index:${users}">
+        <td th:text="${index.count}"></td>
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.address}"></td>
+    </tr>
+
+</table>
+<!--日期-->
+<p th:text="${#dates.format(now,'yyyy-MM-dd HH:mm:ss')}"></p>
+<p th:if="${age>18}">
+    成年
+</p>
+<p th:unless="${age2}>18">
+    未成年
+</p>
+<!--map集合-->
+<p th:if="${#maps.containsKey(dataMap,'No')}">
+    有这个key
+</p>
+
+<p th:each="map,index:${dataMap}">
+    <span th:text="${index.count}"></span>
+    <span th:text="${map.key}"></span>
+    <span th:text="${map.value}"></span>
+</p>
+<p th:if="${#strings.startsWith(str,'a')}">
+    <span th:text="${#strings.replace(str,'a','1')}"/>
+</p>
+
+<a th:href="@{${url}(name=1,address=2)}">点击连接</a>
+<a th:href="@{'/add'(name=1,address=2)}">点击连接</a>
+<img th:src="'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1924411978,2074577357&fm=26&gp=0.jpg'">
+<!--循环输出1-10-->
+<p th:each="i:${#numbers.sequence(1,10,1)}">
+    <span th:text="${i}"></span>
+</p>
+</body>
+</html>
